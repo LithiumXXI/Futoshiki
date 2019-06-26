@@ -27,59 +27,43 @@ public class ConstraintGreater extends FutoshikiConstraints {
     @Override
     public String getContent() {
         if (row) {
-            return(">");
-        }else {
-            return("^");
+            return (">");
+        } else {
+            return ("^");
         }
     }
-    
+
     /**
-     *Checks that the numbers next to constraint are valid.
-     * 
+     * Checks that the numbers next to constraint are valid.
+     *
      * @returns true or false
      */
-    @Override
-    public boolean comparison() {
-        int numberRow = puzzle.returnNumber(x + 1, y);
-        int number = puzzle.returnNumber(x, y);
-        int numberColumn = puzzle.returnNumber(x, y + 1); 
-        
-        if(number != 0){
-            if (row || numberRow != 0 ) {
-                return puzzle.returnNumber(x, y) > puzzle.returnNumber(x + 1, y);
-            } else if(numberColumn !=0){
-                return puzzle.returnNumber(x, y) > puzzle.returnNumber(x, y + 1);
-            }
-        }
-
-            return true;
-        
-    }
-
     //Returns a label that will print out the constraint
     @Override
     public Label setStackPane() {
         Label l;
-        if(!row){
+        if (!row) {
             l = new Label(">");
             l.setPrefSize(40, 40);
-            
-        }
-        else{
-             l = new Label("^");
-             l.setPrefSize(40, 40);
-                    
+
+        } else {
+            l = new Label("^");
+            l.setPrefSize(40, 40);
+
         }
         l.setAlignment(Pos.CENTER);
-       l.setStyle( "-fx-font-weight: bold; -fx-text-fill: #EACBD2;" );
-            return l;
-            
+        l.setStyle("-fx-font-weight: bold; -fx-text-fill: #EACBD2;");
+        return l;
+
     }
 
-   
-
+    @Override
+    public boolean compare(Square[][] squares) {
     
-
-
-
+        if (row){
+            return puzzle.getSquare(x, y) < puzzle.getSquare(x + 1, y);
+        } else {
+            return puzzle.getSquare(x, y) < puzzle.getSquare(x, y + 1);
+        }
     }
+}

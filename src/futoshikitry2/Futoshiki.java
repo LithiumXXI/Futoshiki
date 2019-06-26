@@ -69,9 +69,16 @@ public class Futoshiki {
             }
         }
         latinSquareArray();
+        latinSquareShuffle();
 
   
 
+    }
+    public boolean checkSquaresFull(){
+        for(int row= 0; row<gridsize;row++){
+            int i = 1;
+        }
+        return false;
     }
 
     public Boolean checkDuplicateSquare(int row, int col) {
@@ -96,7 +103,29 @@ public class Futoshiki {
         this(DEFAULT_GRIDSIZE);
     }
 
+    private void latinSquareShuffle(){
         
+         // Shuffle the rows
+        for (int i = gridsize- 1; i >= 0; i--) {
+            int j = (int) (Math.random() * i);
+            
+            int[] temp = latinSquares[i];
+            latinSquares[i] = latinSquares[j];
+            latinSquares[j] = temp;
+        }
+        
+        // Shuffle the columns
+        for (int i = gridsize - 1; i >= 0; i--) {
+            int j = (int) (Math.random() * i);
+            
+            for (int k = 0; k < gridsize; k++) {
+                int temp = latinSquares[k][i];
+                latinSquares[k][i] = latinSquares[k][j];
+                latinSquares[k][j] = temp;
+            }
+        }
+
+    }
     private void latinSquareArray() {
         int n = gridsize;
         // A variable to control the  
@@ -104,10 +133,10 @@ public class Futoshiki {
 
         // Loop to print rows 
         for (int i = 0; i < n; i++) { 
-            System.out.println("");
+           
             for (int j = 0; j < n; j++) {
                 int value = (i + j) % n + 1;
-                System.out.print(value);
+                
                 latinSquares[i][j] = value;
             }
 
@@ -253,21 +282,9 @@ public class Futoshiki {
         }
     }
 
-    public boolean isLegal() {
-        boolean legal = true;
+    
 
-        if (isLegalDuplicate() == true && isLegalConstraint() == true) {
-
-            System.out.println("Puzzle is legal");
-        } else {
-            legal = false;
-            System.out.println("Puzzle is not legal");
-
-        }
-
-        return legal;
-
-    }
+    
 
     /**
      * Checks if numbers are duplicate;
@@ -319,20 +336,7 @@ public class Futoshiki {
         return valid;
     }
 
-    public boolean isLegalConstraint() {
-        boolean valid = true;
-
-        for (int i = 0; i > gridsize - 2; i++) {
-            if (columnConstraints[1][i] != null) {
-                valid = columnConstraints[1][i].comparison();
-            }
-            if (rowConstraints[i][1] != null) {
-                valid = rowConstraints[i][1].comparison();
-            }
-        }
-
-        return valid;
-    }
+    
 
     public int returnNumber(int x, int y) {
 
@@ -340,17 +344,6 @@ public class Futoshiki {
 
     }
 
-    public String getProblems() {
-        String problem;
-        if (isLegalDuplicate() == false || isLegalConstraint() == false) {
-            problem = "There is a duplicate";
-        } else if (isLegalConstraint() == true || isLegalDuplicate() == true) {
-            problem = "There is a constraint that is not valid";
-        } else {
-            problem = "There is a duplicate and a constraint that is not valid";
-        }
 
-        return problem;
-    }
 
 }

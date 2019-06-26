@@ -19,10 +19,7 @@ public class ConstraintSmaller extends FutoshikiConstraints {
         super(x, y, row, puzzle);
     }
 
-    @Override
-    public boolean comparison() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     @Override
     public String getContent() {
@@ -50,5 +47,15 @@ public class ConstraintSmaller extends FutoshikiConstraints {
        l.setStyle( "-fx-font-weight: bold; -fx-text-fill: #EACBD2;" );
        return l;
     }
+
+    @Override
+    public boolean compare(Square[][] squares) {
+           if (row){
+            return squares[x][y].getValue() > squares[x+1][y].getValue();
+        } else {
+            return puzzle.getSquare(x, y) > puzzle.getSquare(x, y + 1);
+        }
+    }
+
     
 }

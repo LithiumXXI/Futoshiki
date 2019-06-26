@@ -31,9 +31,10 @@ public abstract class FutoshikiConstraints {
     public abstract Label setStackPane();
 
 
-    public abstract boolean comparison();
 
     public abstract String getContent();
+
+    public abstract boolean compare(Square[][] squares);
    
 
     

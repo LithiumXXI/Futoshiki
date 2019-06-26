@@ -47,6 +47,12 @@ public class SquareButton extends Button {
             
     public void setNumber(String number) {
         this.number.setValue(number);
+                if(s.getValueString().equals("0")){
+                    setText(" ");
+                }        
+                else{
+                    setText(s.getValueString());
+                }
     }
     
 

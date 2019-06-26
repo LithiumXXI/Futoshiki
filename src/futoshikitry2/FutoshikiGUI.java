@@ -221,26 +221,26 @@ public class FutoshikiGUI extends Application {
 
         }
     }
-
+    private Scene back(Stage primaryStage){
+          StackPane root = new StackPane();
+          VBox mainM = mainMenu(primaryStage);
+          root.getChildren().add(mainM);
+         Scene scene = new Scene(root, 600, 500);
+                        scene.getStylesheets().add(getClass().getResource("game.css").toExternalForm());
+          return scene;              
+    }
     
-
-    @Override
-    public void start(Stage primaryStage) {
-      //setting game screen
-      //make sure you change size options etc later on 
-       puzzle.fillPuzzle(10,10,10);
-        //new puzzle 
-        //set random
-
-        //Main menu Screen
-        VBox mainMenu = new VBox();
+    
+private VBox mainMenu(Stage primaryStage){
+     VBox mainMenu = new VBox();
         mainMenu.setAlignment(Pos.CENTER);
         mainMenu.setSpacing(50);
         mainMenu.setStyle("-fx-background-color: #684A60");
         
+        
         HBox difficulty = new HBox();
         difficulty.setAlignment(Pos.CENTER);
-        Label difficultL = new Label("Difficulty: ");
+        Button difficultL = new Button("Difficulty: ");
         ComboBox difficultCB = new ComboBox();
         difficultCB.getItems().addAll(
                 "Easy",
@@ -265,6 +265,21 @@ public class FutoshikiGUI extends Application {
                 gui.setMaxSize(300,300);
                 gameScreen.setStyle("-fx-background-color: #684A60;");
                 gameScreen.setCenter(gui);
+                VBox optionsGame = new VBox();
+                Button mainMenu = new Button("Main Menu");
+                mainMenu.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                     primaryStage.setScene( back(primaryStage));
+                    }
+                });
+                        
+                Button hint = new Button("Hint");
+                Button giveUp = new Button("Give up");
+                optionsGame.setAlignment(Pos.CENTER);
+                
+                optionsGame.getChildren().addAll(mainMenu, hint, giveUp);
+                gameScreen.setRight(optionsGame);
                 
                
                 //TextBox Title
@@ -300,6 +315,19 @@ public class FutoshikiGUI extends Application {
         
         
         mainMenu.getChildren().addAll(futoshikiGame, newButton, difficulty, quitButton);
+    return mainMenu;
+}    
+
+    @Override
+    public void start(Stage primaryStage) {
+      //setting game screen
+      //make sure you change size options etc later on 
+       puzzle.fillPuzzle(10,10,10);
+        //new puzzle 
+        //set random
+
+        //Main menu Screen
+        VBox mainMenu = mainMenu(primaryStage);
         StackPane root = new StackPane(); 
         root.getChildren().add(mainMenu);
         
@@ -317,8 +345,6 @@ public class FutoshikiGUI extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
 }

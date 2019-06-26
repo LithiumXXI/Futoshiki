@@ -9,10 +9,26 @@ and open the template in the editor.
 */
 .button{
     -fx-font-size: 14px;
+     -fx-background-color: #BCA9AC;
+       -fx-text-fill:  #F7F7F7;
+}
+.combo-box{
+     -fx-background-color: #BCA9AC;
+       -fx-text-fill:  #F7F7F7;
+       
+}
+.vbox{
+    -fx-background-color: #684A60;
+}
+.text-field{
+         -fx-background-color: #BCA9AC;
+           -fx-text-fill:  #F7F7F7;
+
 }
 
 .button:hover{
     -fx-font-weight: bold;
+      -fx-text-fill:  #F7F7F7;
 }
 
     
